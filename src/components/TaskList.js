@@ -1,9 +1,17 @@
-import React from "react";
+import React,{useState} from "react";
+import Task from "./Task";
 
-function TaskList() {
+//1. accept state variable tasks array and map them to create Task Componet. have key prop!
+function TaskList({tasks, onHandleDeleteClick}) {
+
+  const tasksList = tasks.map(task =>{
+    return <Task key={task.text} text={task.text} category={task.category} onHandleDeleteClick={onHandleDeleteClick} />
+  })
+
+
   return (
     <div className="tasks">
-      {/* display a list of tasks using Task component */}
+      {tasksList}
     </div>
   );
 }
