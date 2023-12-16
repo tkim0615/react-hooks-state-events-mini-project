@@ -10,6 +10,7 @@ function App() {
   const[tasks, setTasks] = useState(TASKS)
   const[categories, setCategories] = useState(CATEGORIES) //list of categories string in Array
   const[selectedCategory, setSelectedCategory] = useState('All')
+
   function handleDelete(deletedTask){//filter tasks so whichever task clicked is filtered out
     const filterDeleted = tasks.filter(task =>{
       if(deletedTask.text !== task.text){
@@ -18,6 +19,7 @@ function App() {
     })
     setTasks(filterDeleted)
   }
+
   function onHandleClick(category){
       setSelectedCategory(category)
   }
@@ -29,11 +31,17 @@ function App() {
   }
 })
 
+function onTaskFormSubmit(newTask){
+  setTasks([...tasks, newTask])
+}
+
+
+
   return (
     <div className="App">
       <h2>My tasks</h2>
-      <CategoryFilter categories={categories} onHandleClick={onHandleClick} />
-      <NewTaskForm />
+      <CategoryFilter  categories={categories} onHandleClick={onHandleClick} selectedCategory={selectedCategory} />
+      <NewTaskForm onTaskFormSubmit={onTaskFormSubmit} categories={categories}/>
       <TaskList tasks={filtered} handleDelete={handleDelete} />
     </div>
   );

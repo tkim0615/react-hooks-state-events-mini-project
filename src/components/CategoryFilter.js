@@ -1,14 +1,14 @@
-import React,{useState} from "react";
+import React from "react";
 //receiveing categories stateful data(array) as prop from App.
-function CategoryFilter({categories, onHandleClick}) {
+function CategoryFilter({categories, onHandleClick, selectedCategory}) {
 
    const buttonElements = categories.map(category =>{
     function handleClick(){
       onHandleClick(category)
     }
+    return <button className={selectedCategory === category? "selected": ''} onClick={handleClick} key={category}>{category}</button>
+   })      
 
-    return <button onClick={handleClick} key={category}>{category}</button>
-   })                                                 
   return (
     <div className="categories">
       <h5>Category filters</h5>
